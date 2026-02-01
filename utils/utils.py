@@ -30,11 +30,11 @@ def preprocess_text(text):
     """
     # Convert to lowercase
     text = text.lower()
-    text = re.sub(r"<.*?>", "", text) # remove HTML tags
-    text = re.sub(r"http\S+", "", text) # remove URLs
+    text = re.sub(r'\b[a-z]\b', '', text)   # remove single letters
+    text = re.sub(r'[^a-z\s]', '', text)    # remove punctuation
     text = re.sub(r"(?:\.\s*){2,}", " ", text)  # remove .... and . . .
-    text = re.sub(r"[^a-z\s.,!?']", "", text) # keep only letters and basic punctuation
     text = re.sub(r"\s+", " ", text).strip() 
+    text = re.sub(r"\n", "", text)  # remove new lines
     # Remove extra spaces
     text = ' '.join(text.split())
 
